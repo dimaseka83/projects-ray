@@ -22,11 +22,12 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    { src: '~/assets/css/mystyle.scss', lang: 'sass' }
+    { src: '~/assets/css/mystyle.scss', lang: 'sass' },
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    '~/plugins/fontawesome.js'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -46,7 +47,7 @@ export default {
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
     theme: {
-      dark: true,
+      dark: false,
       themes: {
         dark: {
           primary: colors.blue.darken2,
@@ -67,6 +68,6 @@ export default {
 
   // script
   script: [
-    { src: '/bootstrap.bundle.min.js' }
+    { src: '/bootstrap.bundle.min.js' },
   ]
 }
