@@ -1,10 +1,11 @@
 <template>
   <v-app dark>
-    <v-navigation-drawer permanent
+    <v-navigation-drawer
       v-model="drawer"
       :mini-variant="miniVariant"
       :clipped="clipped"
       fixed
+      src="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg"
       app
     >
           <v-list-item>
