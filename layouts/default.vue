@@ -101,14 +101,6 @@ export default {
               title_sub: 'Login',
               to_sub: '/auth/login'
             },
-            {
-              title_sub: 'Register',
-              to_sub: '/auth/register'
-            },
-            {
-              title_sub: 'Forgot Password',
-              to_sub: '/auth/forgotpassword'
-            },
           ]
         },
         {

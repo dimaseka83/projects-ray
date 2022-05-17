@@ -1,11 +1,5 @@
 <template>
-    <div class="background">
-        <nuxt/>
-    </div>
+    <v-app>
+    <nuxt/>
+    </v-app>
 </template>
-<style>
-.background{
-    background: url("~/assets/images/background.svg");
-    height: 100vh;
-}
-</style>
