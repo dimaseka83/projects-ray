@@ -20,19 +20,27 @@
       </v-list-item>
 
       <v-divider></v-divider>
-      <v-list>
+      <v-list v-for="(item, i) in items"
+          :key="i">
+        <v-list-group :value="true" prepend-icon="mdi-account-circle" v-if="item.sub != null">
+          <template v-slot:activator>
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </template>
+
+          <v-list-item v-for="(sub, i) in item.sub" :key="'sub'+ i" link :to="sub.to_sub">
+            <v-list-item-title v-text="sub.title_sub"></v-list-item-title>
+          </v-list-item>
+        </v-list-group>
         <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
           :to="item.to"
           router
           exact
-        >
+         v-else>
           <v-list-item-action>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title v-text="item.title" />
+            <v-list-item-title v-text="item.title"/>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -76,7 +84,20 @@ export default {
         {
           icon: 'mdi-account-circle',
           title: 'Authentication',
-          to: '/auth/login'
+          sub: [
+            {
+              title_sub: 'Login',
+              to_sub: '/auth/login'
+            },
+            {
+              title_sub: 'Register',
+              to_sub: '/auth/register'
+            },
+            {
+              title_sub: 'Forgot Password',
+              to_sub: '/auth/forgotpassword'
+            },
+          ]
         },
         {
           icon: 'mdi-form-select',
@@ -87,6 +108,11 @@ export default {
           icon: 'mdi-tablet-android',
           title: 'Icons',
           to: '/icons'
+        },
+        {
+          icon: 'mdi-view-list',
+          title: 'Table',
+          to: '/table'
         }
       ],
       miniVariant: false,

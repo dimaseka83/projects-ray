@@ -1,12 +1,11 @@
 import colors from 'vuetify/es5/util/colors'
-import webpack from 'webpack'
-
+const webpack = require('webpack')
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   target: 'static',
   head: {
-    titleTemplate: '%s - projects-ray',
-    title: 'projects-ray',
+    titleTemplate: '%s - projects-template',
+    title: 'projects-template',
     htmlAttrs: {
       lang: 'en'
     },
@@ -17,23 +16,19 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
     ]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     { src: '~/assets/css/mystyle.scss', lang: 'sass' },
+    { src: '~/node_modules/select2/dist/css/select2.min.css' },
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '~/plugins/fontawesome.js',
-    new webpack.ProvidePlugin({
-      $: 'jquery',
-      jQuery: 'jquery',
-      'window.jQuery': 'jquery'
-    })
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -70,10 +65,20 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    vendor: ["jquery"],
+    plugins: [
+      new webpack.ProvidePlugin({
+        $: 'jquery',
+        jQuery: 'jquery',
+        'window.jQuery': 'jquery'
+      })
+    ]
   },
 
   // script
   script: [
     { src: '/bootstrap.bundle.min.js' },
+    { src: '~/node_modules/jquery/dist/jquery.min.js', type: 'text/javascript' },
+    { src: '~/node_modules/select2/dist/js/select2.min.js', type: 'text/javascript' },
   ]
 }
