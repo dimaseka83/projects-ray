@@ -1,11 +1,10 @@
 <template>
-  <v-app dark>
+  <v-app>
     <v-navigation-drawer
       v-model="drawer"
       :mini-variant="miniVariant"
       :clipped="clipped"
       fixed
-      src="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg"
       app
     >
           <v-list-item>
@@ -52,6 +51,19 @@
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-spacer />
+      <v-menu left>
+        <template v-slot:activator="{on,attrs}">
+          <v-btn icon v-bind="attrs" v-on="on">
+            <v-icon>mdi-apps</v-icon>
+          </v-btn>
+        </template>
+
+        <v-list>
+          <v-list-item v-for="(lm, i) in leftMenu" :key="'leftMenu'+i" link :to="lm.to">
+          <v-list-item-title>{{lm.title}}</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
     </v-app-bar>
     <v-main>
       <v-container>
@@ -118,7 +130,12 @@ export default {
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'MyApp'
+      title: 'MyApp',
+
+      leftMenu: [
+        {title: 'Change Password', to: '/auth/changepassword'},
+        {title: 'Logout', to: '/auth/logout'}
+      ]
     }
   }
 }
