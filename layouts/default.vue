@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-navigation-drawer v-model="drawer" :mini-variant="miniVariant" :clipped="clipped" fixed app floating
+    <v-navigation-drawer v-model="drawer" :mini-variant="miniVariant" :clipped="clipped" fixed app floating dark
       :width="230">
       <v-list-item>
         <v-list-item-content>
@@ -14,7 +14,7 @@
       </v-list-item>
 
       <v-divider></v-divider>
-      <v-list v-for="(item, i) in items" nav dense :key="i">
+      <v-list v-for="(item, i) in items" nav dense :key="i" >
         <v-list-group :value="true" prepend-icon="mdi-account-circle" v-if="item.sub != null">
           <template v-slot:activator>
             <v-list-item-title>{{ item.title }}</v-list-item-title>
@@ -34,7 +34,7 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar :clipped-left="clipped" fixed app :height="80">
+    <v-app-bar :clipped-left="clipped" fixed app :height="80" dark>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <div class="row ml-5">
         <div class="col-md-8">
@@ -43,7 +43,7 @@
       </div>
       <v-menu left>
         <template v-slot:activator="{on,attrs}">
-          <v-card v-bind="attrs" v-on="on" class="mx-auto" color="grey lighten-5">
+          <v-card v-bind="attrs" v-on="on" class="mx-auto">
             <v-card-text>
               <v-row>
                 <v-col>
@@ -52,9 +52,7 @@
               </v-avatar>
                 </v-col>
                 <v-col>
-                  <span class="font-weight-black">
                 Admin
-              </span>
                 </v-col>
               </v-row>
             </v-card-text>
@@ -127,7 +125,7 @@
           },
           {
             title: 'Logout',
-            to: '/auth/logout'
+            to: '/auth/login'
           }
         ]
       }
