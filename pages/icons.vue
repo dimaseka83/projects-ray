@@ -1,5 +1,6 @@
 <template>
     <div>
+    <h5 class="font-weight-bold mb-8">Icons</h5>
         <div class="row">
         <div class="col" v-for="(ic, index) in icons" :key="index">
         <button class="btn btn-outline-primary p-5">

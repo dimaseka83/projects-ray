@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h5 class="font-weight-bold mb-8">Table</h5>
     <div class="card card-custom">
       <div class="card-header">
         <div class="d-flex bd-highlight">

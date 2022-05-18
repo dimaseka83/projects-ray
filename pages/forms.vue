@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h5 class="font-weight-bold mb-8">Forms</h5>
     <div class="row">
       <div class="col-6">
         <div class="card card-custom">
@@ -7,7 +8,7 @@
             <h4 class="card-title">Form Controls</h4>
           </div>
           <form action="">
-            <div class="card-body">
+            <div class="card-body mx-5">
               <div class="form-group mb-5">
                 <label for="">Email address <span class="text-danger">*</span></label>
                 <input type="text" class="form-control" placeholder="Enter email">
@@ -47,7 +48,7 @@
             <h4 class="card-title">Input Custom</h4>
           </div>
           <form action="">
-            <div class="card-body">
+            <div class="card-body mx-5">
               <div class="form-group mb-5">
                 <label for="">Example Select2</label>
                 <select name="" id="select2" class="form-control">
