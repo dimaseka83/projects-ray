@@ -67,7 +67,7 @@
       </v-menu>
     </v-app-bar>
     <v-main>
-      <v-container class="m-5">
+      <v-container class="my-8">
         <Nuxt />
       </v-container>
     </v-main>
