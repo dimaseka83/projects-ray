@@ -34,7 +34,45 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar :clipped-left="clipped" fixed app :height="80" dark>
+
+    <v-navigation-drawer v-model="drawerRight" :mini-variant="miniVariant" :clipped="clipped" fixed app floating right
+      :width="230">
+      <v-list-item >
+        <v-list-item-content>
+          <v-list-item-title class="text-h6">
+            Sidebar Style
+          </v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+
+      <v-divider></v-divider>
+      <v-list nav dense>
+        <v-list-item color="primary">
+          <v-list-item-title>Sidebar Close</v-list-item-title>
+          <v-spacer></v-spacer>
+          <v-switch v-model="drawer"></v-switch>
+        </v-list-item>
+          <v-list-item color="primary">
+          <v-list-item-title>Filters</v-list-item-title>
+          <v-spacer></v-spacer>
+          <v-text-field v-model="color" v-mask="mask" hide-details solo>
+					<template v-slot:append>
+						<v-menu v-model="menu" top nudge-bottom="105" nudge-left="16" :close-on-content-click="false">
+							<template v-slot:activator="{ on }">
+								<div :style="swatchStyle" v-on="on" />
+							</template>
+							<v-card>
+								<v-card-text class="pa-0">
+									<v-color-picker v-model="color" flat />
+								</v-card-text>
+							</v-card>
+						</v-menu>
+					</template>
+				</v-text-field>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+    <v-app-bar :clipped-left="clipped" fixed app :height="80">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <div class="row ml-5">
         <div class="col-md-8">
@@ -43,20 +81,13 @@
       </div>
       <v-menu left>
         <template v-slot:activator="{on,attrs}">
-          <v-card v-bind="attrs" v-on="on" class="mx-auto">
-            <v-card-text>
-              <v-row>
-                <v-col>
-                  <v-avatar color="brown" size="30">
-                <span class="white--text text-h5">A</span>
-              </v-avatar>
-                </v-col>
-                <v-col>
-                Admin
-                </v-col>
-              </v-row>
-            </v-card-text>
-          </v-card>
+        <v-btn icon @click.stop="drawerRight = !drawerRight">
+          <v-icon>mdi-cog</v-icon>
+        </v-btn>
+          <v-btn v-bind="attrs" v-on="on" icon class="mr-10">
+          <v-icon left>mdi-account</v-icon>
+          Admin</v-btn>
+
         </template>
 
         <v-list>
@@ -82,8 +113,12 @@
     name: 'DefaultLayout',
     data() {
       return {
+        		color: '#1976D2FF',
+		mask: '!#XXXXXXXX',
+		menu: false,
         clipped: false,
         drawer: false,
+        drawerRight: false,
         fixed: false,
         items: [{
             icon: 'mdi-apps',
@@ -129,7 +164,20 @@
           }
         ]
       }
-    }
+    },
+    computed: {
+      swatchStyle() {
+        const { color, menu } = this
+      return {
+        backgroundColor: color,
+        cursor: 'pointer',
+        height: '30px',
+        width: '30px',
+        borderRadius: menu ? '50%' : '4px',
+        transition: 'border-radius 200ms ease-in-out'
+      }
+      }
+    },
   }
 
 </script>
@@ -138,5 +186,7 @@
   .v-application--is-ltr .v-list-item__icon:first-child {
     margin-right: 10px;
   }
-
+  .theme--dark.v-navigation-drawer{
+    --background-color: #363636;
+  }
 </style>
