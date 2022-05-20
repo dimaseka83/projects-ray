@@ -113,7 +113,7 @@
     name: 'DefaultLayout',
     data() {
       return {
-        		color: '#1976D2FF',
+        		color: '#000000',
 		mask: '!#XXXXXXXX',
 		menu: false,
         clipped: false,
@@ -168,6 +168,9 @@
     computed: {
       swatchStyle() {
         const { color, menu } = this
+        if(process.client){
+          document.querySelector('.theme--dark.v-navigation-drawer').style.backgroundColor = this.color;
+        }
       return {
         backgroundColor: color,
         cursor: 'pointer',
@@ -180,13 +183,12 @@
     },
   }
 
+
 </script>
 <style>
   .v-application--is-ltr .v-list-item__action:first-child,
   .v-application--is-ltr .v-list-item__icon:first-child {
     margin-right: 10px;
   }
-  .theme--dark.v-navigation-drawer{
-    --background-color: #363636;
-  }
+  
 </style>
