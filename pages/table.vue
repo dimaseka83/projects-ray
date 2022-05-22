@@ -12,7 +12,23 @@
       </div>
     </div>
     <div class="card-body">
-      <v-data-table :headers="headers" :items="table" :search="search"></v-data-table>
+      <v-data-table
+       :headers="headers" 
+       :items="table" 
+       :search="search"
+       :page.sync="page"
+       :items-per-page="itemsPerPage"
+       hide-default-footer
+       class="elevation-1"
+       @page-count="pageCount = $event"
+       ></v-data-table>
+       <div class="text-center pt-2">
+        <v-pagination
+          v-model="page"
+          :length="pageCount"
+          color="teal"
+        ></v-pagination>
+       </div>
     </div>
   </div>  
 </template>
@@ -21,6 +37,9 @@
     data() {
       return {
         search: '',
+        page: 1,
+        pageCount: 0,
+        itemsPerPage: 10,
         headers: [{
             text: '#',
             align: 'left',

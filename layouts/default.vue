@@ -74,20 +74,38 @@
     </v-navigation-drawer> -->
     <v-app-bar :clipped-left="clipped" fixed app :height="80">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <div class="row ml-5">
+      <div class="row ml-5" v-if="displayMobile">
         <div class="col-md-8">
           <input type="text" class="form-control" placeholder="Lacak Order ID">
         </div>
       </div>
+      <div class="mr-2" v-else>
+          <input type="text" class="form-control" placeholder="Lacak Order ID">
+      </div>
+
       <v-menu left>
         <template v-slot:activator="{on,attrs}">
         <!-- <v-btn icon @click.stop="drawerRight = !drawerRight">
           <v-icon>mdi-cog</v-icon>
         </v-btn> -->
-          <v-btn v-bind="attrs" v-on="on" icon class="mr-10">
-          <v-icon left>mdi-account</v-icon>
-          Admin</v-btn>
-
+          <v-card
+          class="mx-auto"
+          v-on="on"
+          v-bind="attrs"
+          >
+            <v-card-title>
+               <v-avatar
+              color="brown"
+              :size="sizeAvatar"
+            >
+              <span class="white--text text-h6">A</span>
+            </v-avatar>
+            <v-row class="pl-1" v-if="displayMobile">
+              <span class="body-2 font-weight-regular">Admin</span>
+              <span class="body-2 font-weight-regular">+62896372123</span>
+            </v-row>
+            </v-card-title>
+          </v-card>
         </template>
 
         <v-list>
@@ -197,6 +215,18 @@
     //   }
     //   }
     // },
+    computed: {
+      displayMobile() {
+        return this.$vuetify.breakpoint.width >= 400
+      },
+      sizeAvatar(){
+        if(this.displayMobile){
+          return '30px'
+        }else{
+          return '25px'
+        }
+      }
+    }
   }
 
 
