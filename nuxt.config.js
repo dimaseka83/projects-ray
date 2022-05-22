@@ -24,11 +24,13 @@ export default {
   css: [
     { src: '~/assets/css/mystyle.scss', lang: 'sass' },
     { src: '~/node_modules/select2/dist/css/select2.min.css' },
+    { src: '~/assets/css/style.css', lang: 'css' },
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '~/plugins/fontawesome.js',
+    { src: '~/plugins/datetimepicker.js', mode: 'client' },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -71,7 +73,8 @@ export default {
         jQuery: 'jquery',
         'window.jQuery': 'jquery'
       })
-    ]
+    ],
+    cssSourceMap: true
   },
 
   // script

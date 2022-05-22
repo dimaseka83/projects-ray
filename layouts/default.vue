@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-navigation-drawer v-model="drawer" :mini-variant="miniVariant" :clipped="clipped" fixed app floating dark
+    <v-navigation-drawer v-model="drawer" :mini-variant="miniVariant" :clipped="clipped" fixed app floating
       :width="230">
       <v-list-item>
         <v-list-item-content>
@@ -35,7 +35,7 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-navigation-drawer v-model="drawerRight" :mini-variant="miniVariant" :clipped="clipped" fixed app floating right
+    <!-- <v-navigation-drawer v-model="drawerRight" :mini-variant="miniVariant" :clipped="clipped" fixed app floating right
       :width="230">
       <v-list-item >
         <v-list-item-content>
@@ -71,7 +71,7 @@
 				</v-text-field>
         </v-list-item>
       </v-list>
-    </v-navigation-drawer>
+    </v-navigation-drawer> -->
     <v-app-bar :clipped-left="clipped" fixed app :height="80">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <div class="row ml-5">
@@ -81,9 +81,9 @@
       </div>
       <v-menu left>
         <template v-slot:activator="{on,attrs}">
-        <v-btn icon @click.stop="drawerRight = !drawerRight">
+        <!-- <v-btn icon @click.stop="drawerRight = !drawerRight">
           <v-icon>mdi-cog</v-icon>
-        </v-btn>
+        </v-btn> -->
           <v-btn v-bind="attrs" v-on="on" icon class="mr-10">
           <v-icon left>mdi-account</v-icon>
           Admin</v-btn>
@@ -109,7 +109,10 @@
 </template>
 
 <script>
+
   export default {
+    component: {
+    },
     name: 'DefaultLayout',
     data() {
       return {
@@ -134,9 +137,21 @@
             }, ]
           },
           {
-            icon: 'mdi-form-select',
-            title: 'Forms',
-            to: '/forms'
+            icon: 'mdi-bootstrap',
+            title: 'Bootstrap',
+            sub: [{
+              title_sub: 'Forms',
+              to_sub: '/bootstrap/forms'
+            },
+            {
+              title_sub: 'Alert',
+              to_sub: '/bootstrap/alert'
+            },
+            {
+              title_sub: 'Button',
+              to_sub: '/bootstrap/button'
+            },
+            ]
           },
           {
             icon: 'mdi-tablet-android',
@@ -154,10 +169,11 @@
         rightDrawer: false,
         title: 'MyApp',
 
-        leftMenu: [{
-            title: 'Change Password',
-            to: '/auth/changepassword'
-          },
+        leftMenu: [
+          // {
+          //   title: 'Change Password',
+          //   to: '/auth/changepassword'
+          // },
           {
             title: 'Logout',
             to: '/auth/login'
@@ -165,22 +181,22 @@
         ]
       }
     },
-    computed: {
-      swatchStyle() {
-        const { color, menu } = this
-        if(process.client){
-          document.querySelector('.theme--dark.v-navigation-drawer').style.backgroundColor = this.color;
-        }
-      return {
-        backgroundColor: color,
-        cursor: 'pointer',
-        height: '30px',
-        width: '30px',
-        borderRadius: menu ? '50%' : '4px',
-        transition: 'border-radius 200ms ease-in-out'
-      }
-      }
-    },
+    // computed: {
+    //   swatchStyle() {
+    //     const { color, menu } = this
+    //     if(process.client){
+    //       document.querySelector('.theme--dark.v-navigation-drawer').style.backgroundColor = this.color;
+    //     }
+    //   return {
+    //     backgroundColor: color,
+    //     cursor: 'pointer',
+    //     height: '30px',
+    //     width: '30px',
+    //     borderRadius: menu ? '50%' : '4px',
+    //     transition: 'border-radius 200ms ease-in-out'
+    //   }
+    //   }
+    // },
   }
 
 

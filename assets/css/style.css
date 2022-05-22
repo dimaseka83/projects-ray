@@ -1,0 +1,12 @@
+  .overflowAuto {
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: calc(100vh - 163px);
+  }
+
+  .overflowFixed {
+  max-height: 100vh;
+  overflow: auto;
+  position: fixed;
+  width: 50%!important;
+}
