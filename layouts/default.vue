@@ -188,10 +188,10 @@
         title: 'MyApp',
 
         leftMenu: [
-          // {
-          //   title: 'Change Password',
-          //   to: '/auth/changepassword'
-          // },
+          {
+            title: 'Profil',
+            to: '/auth/changeprofil'
+          },
           {
             title: 'Logout',
             to: '/auth/login'

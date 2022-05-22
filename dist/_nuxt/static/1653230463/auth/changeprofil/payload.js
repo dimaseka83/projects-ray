@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/auth/changeprofil", {data:[{}],fetch:{},mutations:void 0});
