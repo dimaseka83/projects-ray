@@ -14,7 +14,7 @@
                       <img src="https://cdn.vuetifyjs.com/images/logos/logo.svg" alt="Vuetify" height="100">
                     </div>
                     <h1 class="text-center display-1 primary--text text--accent-3">Selamat Datang di NuxtJS</h1>
-                    <h4 class="text-center mt-4 ">Mohon isi kolom Email dan Password untuk masuk </h4>
+                    <h4 class="text-center body-2 mt-4 ">Mohon isi kolom Email dan Password untuk masuk </h4>
                     <v-form>
                       <v-text-field label="Email" name="Email" prepend-icon="mdi-email" type="text"
                         color="primary accent-3" />
@@ -44,7 +44,7 @@
                       <img src="https://cdn.vuetifyjs.com/images/logos/logo.svg" alt="Vuetify" height="100">
                     </div>
                     <h1 class="text-center display-1 primary--text text--accent-3">Selamat Datang di NuxtJS</h1>
-                    <h4 class="text-center mt-4 ">Mohon isi kolom Email dan Password untuk masuk </h4>
+                    <h4 class="text-center body-2 mt-4 ">Mohon isi kolom Email dan Password untuk masuk </h4>
                     <v-form>
                       <v-text-field label="Email" name="Email" prepend-icon="mdi-email" type="text"
                         color="primary accent-3" />
@@ -150,8 +150,18 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
-.background{
-  background-image: url('~/assets/images/background.svg');
 
+@media screen and (max-width: 800px) {
+  .background {
+  }
 }
+@media screen and (min-width: 1200px) {
+  .background {
+    background-image: url('~/assets/images/background.svg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+}
+  
 </style>

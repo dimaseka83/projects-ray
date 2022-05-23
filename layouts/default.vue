@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-navigation-drawer v-model="drawer" :mini-variant="miniVariant" :clipped="clipped" fixed app floating
+    <v-navigation-drawer v-model="drawer" :mini-variant="miniVariant" :clipped="clipped" fixed app
       :width="230">
       <v-list-item>
         <v-list-item-content>
@@ -34,44 +34,6 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-
-    <!-- <v-navigation-drawer v-model="drawerRight" :mini-variant="miniVariant" :clipped="clipped" fixed app floating right
-      :width="230">
-      <v-list-item >
-        <v-list-item-content>
-          <v-list-item-title class="text-h6">
-            Sidebar Style
-          </v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
-
-      <v-divider></v-divider>
-      <v-list nav dense>
-        <v-list-item color="primary">
-          <v-list-item-title>Sidebar Close</v-list-item-title>
-          <v-spacer></v-spacer>
-          <v-switch v-model="drawer"></v-switch>
-        </v-list-item>
-          <v-list-item color="primary">
-          <v-list-item-title>Filters</v-list-item-title>
-          <v-spacer></v-spacer>
-          <v-text-field v-model="color" v-mask="mask" hide-details solo>
-					<template v-slot:append>
-						<v-menu v-model="menu" top nudge-bottom="105" nudge-left="16" :close-on-content-click="false">
-							<template v-slot:activator="{ on }">
-								<div :style="swatchStyle" v-on="on" />
-							</template>
-							<v-card>
-								<v-card-text class="pa-0">
-									<v-color-picker v-model="color" flat />
-								</v-card-text>
-							</v-card>
-						</v-menu>
-					</template>
-				</v-text-field>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer> -->
     <v-app-bar :clipped-left="clipped" fixed app :height="80">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <div class="row ml-5" v-if="displayMobile">
@@ -83,11 +45,8 @@
           <input type="text" class="form-control" placeholder="Lacak Order ID">
       </div>
 
-      <v-menu left>
+      <v-menu left offset-y>
         <template v-slot:activator="{on,attrs}">
-        <!-- <v-btn icon @click.stop="drawerRight = !drawerRight">
-          <v-icon>mdi-cog</v-icon>
-        </v-btn> -->
           <v-card
           class="mx-auto"
           v-on="on"
@@ -108,7 +67,7 @@
           </v-card>
         </template>
 
-        <v-list>
+        <v-list :class="paddingList">
           <v-list-item v-for="(lm, i) in leftMenu" :key="'leftMenu'+i" link :to="lm.to">
             <v-list-item-title>{{lm.title}}</v-list-item-title>
           </v-list-item>
@@ -199,22 +158,6 @@
         ]
       }
     },
-    // computed: {
-    //   swatchStyle() {
-    //     const { color, menu } = this
-    //     if(process.client){
-    //       document.querySelector('.theme--dark.v-navigation-drawer').style.backgroundColor = this.color;
-    //     }
-    //   return {
-    //     backgroundColor: color,
-    //     cursor: 'pointer',
-    //     height: '30px',
-    //     width: '30px',
-    //     borderRadius: menu ? '50%' : '4px',
-    //     transition: 'border-radius 200ms ease-in-out'
-    //   }
-    //   }
-    // },
     computed: {
       displayMobile() {
         return this.$vuetify.breakpoint.width >= 400
@@ -224,6 +167,13 @@
           return '30px'
         }else{
           return '25px'
+        }
+      },
+      paddingList(){
+        if(this.displayMobile){
+          return ''
+        }else{
+          return 'pr-16'
         }
       }
     }
