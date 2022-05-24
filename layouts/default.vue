@@ -131,6 +131,19 @@
             ]
           },
           {
+            icon: 'mdi-note-multiple',
+            title: 'Page Sample',
+            sub: [{
+              title_sub: 'Transaction',
+              to_sub: '/pagesample/transaction'
+            },
+            {
+              title_sub: 'Produk',
+              to_sub: '/pagesample/produk'
+            },
+            ]
+          },
+          {
             icon: 'mdi-tablet-android',
             title: 'Icons',
             to: '/icons'
