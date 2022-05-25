@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="d-flex bd-highlight mb-3">
+    <div class="d-flex bd-highlight">
       <div class="me-auto p-2 bd-highlight">
         <v-btn color="grey lighten-5">Cancel</v-btn>
       </div>
@@ -13,12 +13,12 @@
     </div>
     <v-divider></v-divider>
     <div class="row">
-      <div class="col-6 ">
+      <div class="col-6 overflowAuto">
         <h5 class="font-weight-bold">Produk</h5>
         <div :class="classForm">
           <label for="">Gambar <span class="text-danger">*</span></label>
           <div class="form-text">.jpeg, .jpg, .png, max 10MB, ukuran min 300 x 300 px</div>
-          <dropzone id="foo" ref="el" :options="linkDropzone"></dropzone>
+          <dropzone id="foo" ref="el" :options="linkDropzone" :duplicateCheck="true"></dropzone>
         </div>
         <div :class="classForm">
           <label for="">Nama <span class="text-danger">*</span></label>
@@ -35,27 +35,24 @@
         <div :class="classForm">
           <div class="row" v-for="(d, index) in form.variants" :key="index">
             <div class="col">
-                <label for="">Varian <span class="text-danger">*</span></label>
-                <input type="text" class="form-control" v-model="d.varian">
-              </div>
-            <div class="col">
-                <label for="">Berat (gr) <span class="text-danger">*</span></label>
-                <input type="text" class="form-control" v-model="d.berat">
+              <label for="">Varian <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" v-model="d.varian">
             </div>
             <div class="col">
-                <label for="">Harga <span class="text-danger">*</span></label>
-                <div class="input-group mb-3">
-                  <span class="input-group-text" id="basic-addon1">Rp</span>
-                <input type="text" class="form-control" v-model="d.harga">
-              </div>
+              <label for="">Berat (gr) <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" v-model="d.berat">
             </div>
             <div class="col">
-                <label for="">Stock <span class="text-danger">*</span></label>
-                <input type="text" class="form-control" v-model="d.stock">
+              <label for="">Harga <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" v-model="d.harga">
             </div>
             <div class="col">
-                <button class="btn btn-danger" @click="deleteVariant" :class="disabledDelete"><i
-                    class="fa-solid fa-trash"></i></button>
+              <label for="">Stock <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" v-model="d.stock">
+            </div>
+            <div class="col">
+              <button class="btn btn-danger mt-6" @click="deleteVariant" :class="disabledDelete"><i
+                  class="fa-solid fa-trash"></i></button>
             </div>
           </div>
         </div>
@@ -71,7 +68,7 @@
         <div :class="classForm">
           <v-card class="mx-auto">
             <v-card-title>
-              <v-img src="https://everpro.s3.ap-southeast-1.amazonaws.com/logistic/logo/sicepats.png" max-width="200">
+              <v-img src="https://everpro.s3.ap-southeast-1.amazonaws.com/logistic/logo/sicepats.png" max-width="100">
               </v-img>
               <v-row class="ml-5">
                 <v-col>
@@ -82,26 +79,142 @@
             </v-card-title>
             <v-divider></v-divider>
             <v-card-actions>
-              <v-switch inset :label="expresswitch" v-model="switchexpress"></v-switch>
+              <v-switch inset :label="expresswitch" v-model="switchexpress" class="ml-2"></v-switch>
               <v-spacer></v-spacer>
-              <v-btn color="teal" class="text-white">0 Layanan</v-btn>
+              <v-btn color="teal" class="text-white" @click="layanancepat">{{ sicepattext }} Layanan<v-icon right dark
+                  v-if="layanansicepat == true">mdi-arrow-up</v-icon>
+                <v-icon right dark v-else>mdi-arrow-down</v-icon>
+              </v-btn>
             </v-card-actions>
+            <div class="d-flex bd-highlight" v-if="layanansicepat">
+              <div class="me-auto p-2 bd-highlight">
+                <p class="text-muted body-1 ml-2 pt-5">Reguler</p>
+              </div>
+              <div class="p-2 bd-highlight">
+                <v-switch inset :label="expresswitch1" v-model="switchexpress1"></v-switch>
+              </div>
+            </div>
+            <v-card-subtitle v-if="layanansicepat">
+              <p class="text-black body-1">HALU (Harga Mulai Lima Ribu)</p>
+              <p class="text-black body-1">SIUNTUNG (SIUNTUNG)</p>
+              <p class="text-black body-1">SIUNT (Regular)</p>
+              <p class="text-black body-1">REG (Regular)</p>
+              <v-divider></v-divider>
+              <div class="d-flex bd-highlight">
+                <div class="me-auto p-2 bd-highlight">
+                  <p class="text-muted body-1 pt-5">Same Day</p>
+                </div>
+                <div class="p-2 bd-highlight">
+                  <v-switch inset :label="expresswitch2" v-model="switchexpress2"></v-switch>
+                </div>
+              </div>
+              <p class="text-black body-1 ml-2">SDS (Same Day)</p>
+            </v-card-subtitle>
           </v-card>
         </div>
+        <div :class="classForm">
+          <v-card class="mx-auto">
+            <v-card-title>
+              <v-img src="https://upload.wikimedia.org/wikipedia/commons/9/92/New_Logo_JNE.png" max-width="100">
+              </v-img>
+              <v-row class="ml-5">
+                <v-col>
+                  <span class="font-weight-bold">JNE</span>
+                  <p class="font-weight-light">Regular</p>
+                </v-col>
+              </v-row>
+            </v-card-title>
+            <v-divider></v-divider>
+            <v-card-actions>
+              <v-switch inset :label="jneswitch" v-model="switchjne" class="ml-2"></v-switch>
+              <v-spacer></v-spacer>
+              <v-btn color="teal" class="text-white" @click="layananjne">{{ jnetext }} Layanan<v-icon right dark
+                  v-if="layanansijne == true">mdi-arrow-up</v-icon>
+                <v-icon right dark v-else>mdi-arrow-down</v-icon>
+              </v-btn>
+            </v-card-actions>
+            <div class="d-flex bd-highlight" v-if="layanansijne">
+              <div class="me-auto p-2 bd-highlight">
+                <p class="text-muted body-1 ml-2 pt-5">Reguler</p>
+              </div>
+              <div class="p-2 bd-highlight">
+                <v-switch inset :label="jneswitch" v-model="switchjne"></v-switch>
+              </div>
+            </div>
+            <v-card-subtitle v-if="layanansijne">
+              <p class="text-black body-1">REG19 (Regular)</p>
+              <p class="text-black body-1">CTC19 (CTC (City to City))</p>
+              <p class="text-black body-1">OKE19 (OKE (Ongkos Kirim Ekonomis))</p>
+            </v-card-subtitle>
+          </v-card>
+          <div :class="classForm">
+            <label for="">Asal Pengiriman <span class="text-danger">*</span></label>
+            <select name="" id="select2" class="form-control">
+              <option v-for="(opt, id) in asalpengiriman" :key="id" :value="opt.value">{{opt.text}}</option>
+            </select>
+          </div>
+          <h5 class="text-muted body-1">COD DITANGGUNG OLEH</h5>
+          <span class="text-decoration-underline text-teal">Contoh Simulasi Pencarian</span>
+          <div :class="classForm">
+            <v-card color="grey lighten-4">
+              <v-card-text>
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <span class="text-black">Penjual akan dikenakan biaya COD sebesar 3% pada saat pencairan </span>
+              </v-card-text>
+            </v-card>
+          </div>
+          <div :class="classForm">
+            <v-card class="mx-auto">
+              <v-card-title>
+                <v-radio-group v-model="cod">
+                  <v-radio label="Pembeli" color="teal" value="pembeli"></v-radio>
+                </v-radio-group>
+              </v-card-title>
+              <v-card-text class="ml-7 pr-16">
+                <p class="text-black body-1">Biaya COD <span class="text-danger">*</span></p>
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" aria-label="Username"
+                    aria-describedby="basic-addon1">
+                  <span class="input-group-text" id="basic-addon1">%</span>
+                </div>
+                <span class="text-muted"><i class="fa-solid fa-circle-exclamation"></i> Biaya COD akan dibayarkan oleh pembeli kepada penjual berdasarkan harga barang + ongkir </span>
+              </v-card-text>
+            </v-card>
+          </div>
+          <div :class="classForm">
+          <v-card class="mx-auto">
+              <v-card-title>
+                <v-radio-group v-model="cod">
+                <v-radio label="Penjual" color="teal" value="pembeli"></v-radio>
+                </v-radio-group>
+              </v-card-title>
+          </v-card>
+          </div>
+        </div>
       </div>
-      <div class="col-6"></div>
+      <div class="col-6">
+        <select name="" id="" class="form-select col-4" v-model="preview">
+          <option value="desktop">Desktop Preview</option>
+          <option value="mobile">Mobile Preview</option>
+        </select>
+        <v-card>
+
+        </v-card>
+      </div>
     </div>
   </div>
 </template>
 <script>
   import Dropzone from 'nuxt-dropzone'
   import 'nuxt-dropzone/dropzone.css'
+  import 'select2'
   export default {
     components: {
       Dropzone,
     },
     data() {
       return {
+        cod: 'pembeli',
         linkDropzone: {
           url: 'https://httpbin.org/post',
           thumbnailWidth: 200,
@@ -117,7 +230,51 @@
             stock: ''
           }]
         },
+        preview: 'desktop',
+        asalpengiriman: [{
+          text: 'Jakarta',
+          value: 'Jakarta'
+        }, {
+          text: 'Bandung',
+          value: 'Bandung'
+        }, {
+          text: 'Surabaya',
+          value: 'Surabaya'
+        }, {
+          text: 'Yogyakarta',
+          value: 'Yogyakarta'
+        }, {
+          text: 'Semarang',
+          value: 'Semarang'
+        }, {
+          text: 'Bogor',
+          value: 'Bogor'
+        }, {
+          text: 'Bekasi',
+          value: 'Bekasi'
+        }, {
+          text: 'Depok',
+          value: 'Depok'
+        }, {
+          text: 'Tangerang',
+          value: 'Tangerang'
+        }, {
+          text: 'Bogor',
+          value: 'Bogor'
+        }, {
+          text: 'Bekasi',
+          value: 'Bekasi'
+        }],
         switchexpress: false,
+        switchexpress1: false,
+        switchexpress2: false,
+        layanansicepat: false,
+        sicepattext: 0,
+
+        switchjne: false,
+        layanansijne: false,
+        jnetext: 0,
+
       }
     },
     computed: {
@@ -135,7 +292,28 @@
         } else {
           return 'Tidak Aktif'
         }
-      }
+      },
+      expresswitch1() {
+        if (this.switchexpress1) {
+          return 'Aktif'
+        } else {
+          return 'Tidak Aktif'
+        }
+      },
+      expresswitch2() {
+        if (this.switchexpress2) {
+          return 'Aktif'
+        } else {
+          return 'Tidak Aktif'
+        }
+      },
+      jneswitch() {
+        if (this.switchjne) {
+          return 'Aktif'
+        } else {
+          return 'Tidak Aktif'
+        }
+      },
     },
     methods: {
       deleteVariant() {
@@ -154,7 +332,52 @@
         if ((keyCode < 48 || keyCode > 57) && keyCode !== 46) { // 46 is dot
           $event.preventDefault();
         }
-      }
+      },
+      layanancepat() {
+        this.layanansicepat = !this.layanansicepat
+      },
+      layananjne() {
+        this.layanansijne = !this.layanansijne
+      },
+    },
+    watch: {
+      switchexpress(val) {
+        if (val) {
+          this.layanansicepat = true
+          this.switchexpress1 = true
+          this.switchexpress2 = true
+        } else {
+          this.layanansicepat = false
+          this.switchexpress1 = false
+          this.switchexpress2 = false
+        }
+      },
+      switchexpress1(val) {
+        if (val) {
+          this.sicepattext = this.sicepattext + 4
+        } else {
+          this.sicepattext = this.sicepattext - 4
+        }
+      },
+      switchexpress2(val) {
+        if (val) {
+          this.sicepattext = this.sicepattext + 1
+        } else {
+          this.sicepattext = this.sicepattext - 1
+        }
+      },
+      switchjne(val) {
+        if (val) {
+          this.jnetext = this.jnetext + 3
+          this.layanansijne = true
+        } else {
+          this.jnetext = this.jnetext - 3
+          this.layanansijne = false
+        }
+      },
+    },
+    mounted() {
+      $('#select2').select2({})
     },
   }
 

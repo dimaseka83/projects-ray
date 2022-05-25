@@ -10,3 +10,8 @@
   position: fixed;
   width: 50%!important;
 }
+.fixed-content {
+  position:fixed;
+  overflow-y:scroll;
+  overflow-x:hidden;
+}
