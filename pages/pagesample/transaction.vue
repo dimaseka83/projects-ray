@@ -35,40 +35,31 @@
         <div :class="classForm">
           <div class="row" v-for="(d, index) in form.variants" :key="index">
             <div class="col">
-              <div class="form-group">
                 <label for="">Varian <span class="text-danger">*</span></label>
                 <input type="text" class="form-control" v-model="d.varian">
               </div>
-            </div>
             <div class="col">
-              <div class="form-group">
                 <label for="">Berat (gr) <span class="text-danger">*</span></label>
                 <input type="text" class="form-control" v-model="d.berat">
-              </div>
             </div>
             <div class="col">
-              <div class="form-group">
                 <label for="">Harga <span class="text-danger">*</span></label>
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="basic-addon1">Rp</span>
                 <input type="text" class="form-control" v-model="d.harga">
               </div>
             </div>
             <div class="col">
-              <div class="form-group">
                 <label for="">Stock <span class="text-danger">*</span></label>
                 <input type="text" class="form-control" v-model="d.stock">
-              </div>
             </div>
             <div class="col">
-              <div class="form-group mt-6">
                 <button class="btn btn-danger" @click="deleteVariant" :class="disabledDelete"><i
                     class="fa-solid fa-trash"></i></button>
-              </div>
             </div>
           </div>
         </div>
-        <div :class="classForm">
-          <v-btn color="teal accent-2" @click="addVariant">Tambah varian</v-btn>
-        </div>
+        <v-btn color="teal accent-2" @click="addVariant">Tambah varian</v-btn>
         <v-divider></v-divider>
         <h5 class="text-muted body-1">TRACKING</h5>
         <div :class="classForm">
@@ -91,10 +82,9 @@
             </v-card-title>
             <v-divider></v-divider>
             <v-card-actions>
-              <div class=" ml-5">
-                  <v-switch inset :label="expresswitch" v-model="switchexpress"></v-switch>
-                  <v-btn color="teal" class="text-white">0 Layanan</v-btn>
-              </div>
+              <v-switch inset :label="expresswitch" v-model="switchexpress"></v-switch>
+              <v-spacer></v-spacer>
+              <v-btn color="teal" class="text-white">0 Layanan</v-btn>
             </v-card-actions>
           </v-card>
         </div>
