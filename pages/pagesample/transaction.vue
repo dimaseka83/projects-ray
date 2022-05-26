@@ -197,9 +197,68 @@
           <option value="desktop">Desktop Preview</option>
           <option value="mobile">Mobile Preview</option>
         </select>
-        <v-card>
-
-        </v-card>
+        <div class="card mt-5">
+          <div class="card-body">
+            <div class="row">
+              <div class="col"></div>
+              <div class="col">
+                <div :class="classForm">
+                <div class="row g-3">
+                  <div class="col-auto">
+                    <label for="">Pilih Produk</label>
+                    <select name="" id="" class="form-control"></select>
+                  </div>
+                  <div class="col-auto">
+                    <label for="">Jumlah</label>
+                    <input type="text" class="form-control">
+                  </div>
+                  <div class="col-auto">
+                    <button class="btn btn-danger mt-6" :class="disabledDelete"><i
+                  class="fa-solid fa-trash"></i></button>
+                  </div>
+                </div>
+                  <v-btn color="teal accent-2" @click="addVariant">Tambah Pesanan</v-btn>
+                </div>
+                  <v-divider></v-divider>
+                <div :class="classForm">
+                <label for="">Nama Penerima</label>
+                <input type="text" class="form-control">
+                </div>
+                <div :class="classForm">
+                <label for="">No. Whatsapp</label>
+                <input type="text" class="form-control" @keypress="onlyNumber">
+                </div>
+                <div :class="classForm">
+                <label for="">Alamat</label>
+                <textarea name="" id="" rows="5" class="form-control"></textarea>
+                </div>
+                <div :class="classForm">
+                <label for="">Kelurahan/Kecamatan</label>
+                <input type="text" class="form-control">
+                </div>
+                <div :class="classForm">
+                <label for="">Kodepos</label>
+                <input type="text" class="form-control">
+                </div>
+                <div :class="classForm">
+                <label for="">Pilih Ekspedisi</label>
+                <select name="" id="" class="form-control"></select>
+                </div>
+                <div :class="classForm">
+                <label for="">Pilih Layanan</label>
+                <select name="" id="" class="form-control"></select>
+                </div>
+                <v-divider></v-divider>
+                <h5 class="body-1 text-muted mt-2">RINCIAN PESANAN</h5>
+                <div class="card">
+                  <div class="card-body">
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
