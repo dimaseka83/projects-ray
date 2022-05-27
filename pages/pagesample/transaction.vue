@@ -173,90 +173,227 @@
               <v-card-text class="ml-7 pr-16">
                 <p class="text-black body-1">Biaya COD <span class="text-danger">*</span></p>
                 <div class="input-group mb-3">
-                  <input type="text" class="form-control" aria-label="Username"
-                    aria-describedby="basic-addon1">
+                  <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
                   <span class="input-group-text" id="basic-addon1">%</span>
                 </div>
-                <span class="text-muted"><i class="fa-solid fa-circle-exclamation"></i> Biaya COD akan dibayarkan oleh pembeli kepada penjual berdasarkan harga barang + ongkir </span>
+                <span class="text-muted"><i class="fa-solid fa-circle-exclamation"></i> Biaya COD akan dibayarkan oleh
+                  pembeli kepada penjual berdasarkan harga barang + ongkir </span>
               </v-card-text>
             </v-card>
           </div>
           <div :class="classForm">
-          <v-card class="mx-auto">
+            <v-card class="mx-auto">
               <v-card-title>
                 <v-radio-group v-model="cod">
-                <v-radio label="Penjual" color="teal" value="pembeli"></v-radio>
+                  <v-radio label="Penjual" color="teal" value="pembeli"></v-radio>
                 </v-radio-group>
               </v-card-title>
-          </v-card>
+            </v-card>
           </div>
         </div>
       </div>
-      <div class="col-6">
+      <div class="col-6 overflowAuto">
         <select name="" id="" class="form-select col-4" v-model="preview">
           <option value="desktop">Desktop Preview</option>
           <option value="mobile">Mobile Preview</option>
         </select>
-        <div class="card mt-5">
+        <div class="card mt-5" v-if="preview == 'desktop'">
           <div class="card-body">
             <div class="row">
-              <div class="col"></div>
-              <div class="col">
-                <div :class="classForm">
-                <div class="row g-3">
-                  <div class="col-auto">
+              <div class="col-4">
+                <v-carousel :show-arrows="false" height="200">
+                  <v-carousel-item v-for="(item,i) in imgcarousel" :key="i" :src="item.src"></v-carousel-item>
+                </v-carousel>
+              </div>
+              <div class="col-8">
+                <div class="row" v-for="(prd, idx) in formpreview.prd" :key="idx">
+                  <div class="col">
                     <label for="">Pilih Produk</label>
-                    <select name="" id="" class="form-control"></select>
+                    <select name="" id="" class="form-control" v-model="prd.name">
+                      <option :value="id" v-for="(pd, id) in produk" :key="id">{{pd.name}}</option>
+                    </select>
                   </div>
-                  <div class="col-auto">
+                  <div class="col">
                     <label for="">Jumlah</label>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" v-model="prd.jumlah">
                   </div>
-                  <div class="col-auto">
-                    <button class="btn btn-danger mt-6" :class="disabledDelete"><i
-                  class="fa-solid fa-trash"></i></button>
+                  <div class="col">
+                    <button class="btn btn-danger mt-6" :class="disabledDeletePreview" @click="deletePrdPreview"><i
+                        class="fa-solid fa-trash"></i></button>
                   </div>
                 </div>
-                  <v-btn color="teal accent-2" @click="addVariant">Tambah Pesanan</v-btn>
-                </div>
-                  <v-divider></v-divider>
+                <v-btn color="teal accent-2 mt-2" @click="addPrdPreview">Tambah Pesanan</v-btn>
+                <v-divider></v-divider>
                 <div :class="classForm">
-                <label for="">Nama Penerima</label>
-                <input type="text" class="form-control">
-                </div>
-                <div :class="classForm">
-                <label for="">No. Whatsapp</label>
-                <input type="text" class="form-control" @keypress="onlyNumber">
+                  <label for="">Nama Penerima</label>
+                  <input type="text" class="form-control">
                 </div>
                 <div :class="classForm">
-                <label for="">Alamat</label>
-                <textarea name="" id="" rows="5" class="form-control"></textarea>
+                  <label for="">No. Whatsapp</label>
+                  <input type="text" class="form-control" @keypress="onlyNumber">
                 </div>
                 <div :class="classForm">
-                <label for="">Kelurahan/Kecamatan</label>
-                <input type="text" class="form-control">
+                  <label for="">Alamat</label>
+                  <textarea name="" id="" rows="5" class="form-control"></textarea>
                 </div>
                 <div :class="classForm">
-                <label for="">Kodepos</label>
-                <input type="text" class="form-control">
+                  <label for="">Kelurahan/Kecamatan</label>
+                  <input type="text" class="form-control">
                 </div>
                 <div :class="classForm">
-                <label for="">Pilih Ekspedisi</label>
-                <select name="" id="" class="form-control"></select>
+                  <label for="">Kodepos</label>
+                  <input type="text" class="form-control">
                 </div>
                 <div :class="classForm">
-                <label for="">Pilih Layanan</label>
-                <select name="" id="" class="form-control"></select>
+                  <label for="">Pilih Ekspedisi</label>
+                  <select name="" id="" class="form-control"></select>
+                </div>
+                <div :class="classForm">
+                  <label for="">Pilih Layanan</label>
+                  <select name="" id="" class="form-control"></select>
                 </div>
                 <v-divider></v-divider>
                 <h5 class="body-1 text-muted mt-2">RINCIAN PESANAN</h5>
-                <div class="card">
-                  <div class="card-body">
-                    
-                  </div>
-                </div>
+                <v-card>
+                  <v-card-text>
+                    <div class="d-flex bd-highlight">
+                      <div class="p-2 w-100 bd-highlight mb-n5">
+                        <span class="font-weight-black">Product Name</span>
+                      </div>
+                      <div class="p-2 flex-shrink-1 bd-highlight mb-n5">
+                        <span>(x0)</span>
+                      </div>
+                    </div>
+                  </v-card-text>
+                  <v-divider></v-divider>
+                  <v-card-text>
+                    <div class="d-flex bd-highlight">
+                      <div class="p-2 w-100 bd-highlight my-n5">
+                        <span class="font-weight-normal body-1">Biaya COD</span>
+                      </div>
+                      <div class="p-2 flex-shrink-1 bd-highlight my-n5">
+                        <span>(x0)</span>
+                      </div>
+                    </div>
+                  </v-card-text>
+                  <v-divider></v-divider>
+                  <v-card-text>
+                    <div class="d-flex bd-highlight">
+                      <div class="p-2 flex-grow-1 bd-highlight my-n5">
+                        <span class="font-weight-bold body-1 ">Total</span>
+                      </div>
+                      <div class="p-2 bd-highlight my-n5">
+                        <span class="font-weight-bold">Rp 0</span>
+                      </div>
+                    </div>
+                  </v-card-text>
+                  <v-divider></v-divider>
+                  <v-card-actions>
+                    <v-btn class="font-weight-light teal text-white" block>Beli Sekarang</v-btn>
+                  </v-card-actions>
+                </v-card>
               </div>
             </div>
+          </div>
+        </div>
+        <div class="card mt-5" v-else>
+          <div class="card-body">
+            <v-carousel :show-arrows="false" height="300">
+              <v-carousel-item v-for="(item,i) in imgcarousel" :key="i" :src="item.src"></v-carousel-item>
+            </v-carousel>
+          </div>
+          <v-divider></v-divider>
+          <div class="card-body">
+            <div class="row" v-for="(prd, idx) in formpreview.prd" :key="idx">
+              <div class="col-6">
+                <label for="">Pilih Produk</label>
+                <select name="" id="" class="form-control" v-model="prd.name">
+                  <option :value="id" v-for="(pd, id) in produk" :key="id">{{pd.name}}</option>
+                </select>
+              </div>
+              <div class="col-4">
+                <label for="">Jumlah</label>
+                <input type="text" class="form-control" v-model="prd.jumlah">
+              </div>
+              <div class="col">
+                <button class="btn btn-danger mt-6" :class="disabledDeletePreview" @click="deletePrdPreview"><i
+                    class="fa-solid fa-trash"></i></button>
+              </div>
+            </div>
+            <v-btn color="teal accent-2 mt-2" @click="addPrdPreview">Tambah Pesanan</v-btn>
+          </div>
+          <v-divider></v-divider>
+          <div class="card-body">
+            <div :class="classForm">
+              <label for="">Nama Penerima</label>
+              <input type="text" class="form-control">
+            </div>
+            <div :class="classForm">
+              <label for="">No. Whatsapp</label>
+              <input type="text" class="form-control" @keypress="onlyNumber">
+            </div>
+            <div :class="classForm">
+              <label for="">Alamat</label>
+              <textarea name="" id="" rows="5" class="form-control"></textarea>
+            </div>
+            <div :class="classForm">
+              <label for="">Kelurahan/Kecamatan</label>
+              <input type="text" class="form-control">
+            </div>
+            <div :class="classForm">
+              <label for="">Kodepos</label>
+              <input type="text" class="form-control">
+            </div>
+            <div :class="classForm">
+              <label for="">Pilih Ekspedisi</label>
+              <select name="" id="" class="form-control"></select>
+            </div>
+            <div :class="classForm">
+              <label for="">Pilih Layanan</label>
+              <select name="" id="" class="form-control"></select>
+            </div>
+          </div>
+          <v-divider></v-divider>
+          <div class="card-body">
+            <h5 class="body-1 text-muted mt-2">RINCIAN PESANAN</h5>
+            <v-card>
+              <v-card-text>
+                <div class="d-flex bd-highlight">
+                  <div class="p-2 w-100 bd-highlight mb-n5">
+                    <span class="font-weight-black">Product Name</span>
+                  </div>
+                  <div class="p-2 flex-shrink-1 bd-highlight mb-n5">
+                    <span>(x0)</span>
+                  </div>
+                </div>
+              </v-card-text>
+              <v-divider></v-divider>
+              <v-card-text>
+                <div class="d-flex bd-highlight">
+                  <div class="p-2 w-100 bd-highlight my-n5">
+                    <span class="font-weight-normal body-1">Biaya COD</span>
+                  </div>
+                  <div class="p-2 flex-shrink-1 bd-highlight my-n5">
+                    <span>(x0)</span>
+                  </div>
+                </div>
+              </v-card-text>
+              <v-divider></v-divider>
+              <v-card-text>
+                <div class="d-flex bd-highlight">
+                  <div class="p-2 flex-grow-1 bd-highlight my-n5">
+                    <span class="font-weight-bold body-1 ">Total</span>
+                  </div>
+                  <div class="p-2 bd-highlight my-n5">
+                    <span class="font-weight-bold">Rp 0</span>
+                  </div>
+                </div>
+              </v-card-text>
+              <v-divider></v-divider>
+              <v-card-actions>
+                <v-btn class="font-weight-light teal text-white" block>Beli Sekarang</v-btn>
+              </v-card-actions>
+            </v-card>
           </div>
         </div>
       </div>
@@ -273,6 +410,36 @@
     },
     data() {
       return {
+        imgcarousel: [{
+            src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
+          },
+          {
+            src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
+          },
+          {
+            src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg',
+          },
+          {
+            src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg',
+          },
+        ],
+        produk: [{
+            name: 'Produk 1',
+            price: 'Rp. 100.000',
+          },
+          {
+            name: 'Produk 2',
+            price: 'Rp. 100.000',
+          },
+          {
+            name: 'Produk 3',
+            price: 'Rp. 100.000',
+          },
+          {
+            name: 'Produk 4',
+            price: 'Rp. 100.000',
+          },
+        ],
         cod: 'pembeli',
         linkDropzone: {
           url: 'https://httpbin.org/post',
@@ -289,7 +456,13 @@
             stock: ''
           }]
         },
-        preview: 'desktop',
+        formpreview: {
+          prd: [{
+            nama: '',
+            jumlah: ''
+          }]
+        },
+        preview: 'mobile',
         asalpengiriman: [{
           text: 'Jakarta',
           value: 'Jakarta'
@@ -345,6 +518,11 @@
           return 'disabled'
         }
       },
+      disabledDeletePreview() {
+        if (this.formpreview.prd.length <= 1) {
+          return 'disabled'
+        }
+      },
       expresswitch() {
         if (this.switchexpress) {
           return 'Aktif'
@@ -384,6 +562,15 @@
           berat: '',
           harga: '',
           stock: ''
+        })
+      },
+      deletePrdPreview() {
+        this.formpreview.prd.splice(this.formpreview.prd.indexOf(this.formpreview.prd), 1)
+      },
+      addPrdPreview() {
+        this.formpreview.prd.push({
+          nama: '',
+          jumlah: ''
         })
       },
       onlyNumber($event) {
