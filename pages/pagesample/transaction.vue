@@ -32,19 +32,19 @@
               </div>
             </div>
             <div class="col-3">
-              <select name="" id="" class="form-select">
-                <option value="">Semua Status</option>
-                <option value="">Tertunda</option>
-                <option value="">Diproses</option>
-                <option value="">Selesai</option>
-                <option value="">Dikembalikan</option>
+              <select name="" id="" class="form-select" @change="statusEvent($event)" v-model="status">
+        <option value="semua">Semua Status</option>
+        <option value="tertunda">Tertunda</option>
+        <option value="diproses">Diproses</option>
+        <option value="selesai">Selesai</option>
+        <option value="dikembalikan">Dikembalikan</option>
               </select>
             </div>
             <div class="col-3">
-              <select name="" id="" class="form-select">
-                <option value="">Semua Kurir</option>
-                <option value="">Sicepat</option>
-                <option value="">JNE</option>
+              <select name="" id="" class="form-select" @change="kurirEvent($event)" v-model="kurir">
+        <option value="semua">Semua Kurir</option>
+        <option value="sicepat">Sicepat</option>
+        <option value="jne">JNE</option>
               </select>
             </div>
           </div>
@@ -68,17 +68,17 @@
         <input type="text" class="form-control" placeholder="Cari transaksi" aria-label="Username"
           aria-describedby="basic-addon1" v-model="search">
       </div>
-      <select name="" id="" class="form-select mt-2">
+      <select name="" id="" class="form-select mt-2" @change="statusEvent($event)" v-model="status">
         <option value="">Semua Status</option>
-        <option value="">Tertunda</option>
-        <option value="">Diproses</option>
-        <option value="">Selesai</option>
-        <option value="">Dikembalikan</option>
+        <option value="tertunda">Tertunda</option>
+        <option value="diproses">Diproses</option>
+        <option value="selesai">Selesai</option>
+        <option value="dikembalikan">Dikembalikan</option>
       </select>
-      <select name="" id="" class="form-select mt-2">
+      <select name="" id="" class="form-select mt-2" @change="kurirEvent($event)" v-model="kurir">
         <option value="">Semua Kurir</option>
-        <option value="">Sicepat</option>
-        <option value="">JNE</option>
+        <option value="sicepat">Sicepat</option>
+        <option value="jne">JNE</option>
       </select>
     </div>
 
@@ -91,7 +91,12 @@
        hide-default-footer
        class="elevation-1 mt-5"
        @page-count="pageCount = $event"
-       ></v-data-table>
+       >
+       <template v-slot:item.id="{item}">
+         <p v-text="item.id" class="mt-2"></p>
+         <v-btn color="error" class="mb-2" small>{{item.status}}</v-btn>
+       </template>
+       </v-data-table>
        <div class="text-center pt-2">
         <v-pagination
           v-model="page"
@@ -105,6 +110,8 @@
   export default {
     data() {
       return {
+        status: 'semua',
+        kurir: 'semua',
         menu: false,
         date: null,
          search: '',
@@ -112,50 +119,79 @@
         pageCount: 0,
         itemsPerPage: 10,
         headers: [{
-            text: '#',
+            text: 'ID',
             align: 'left',
             value: 'id'
           },
           {
-            text: 'First',
+            text: 'Tanggal',
             align: 'left',
-            value: 'first'
+            value: 'tanggal'
           },
           {
-            text: 'Last',
+            text: 'Nama',
             align: 'left',
-            value: 'last'
+            value: 'nama'
           },
           {
-            text: 'Handle',
+            text: 'Telepon',
             align: 'left',
-            value: 'handle'
+            value: 'telepon'
+          },
+          {
+             text: 'Produk',
+            align: 'left',
+            value: 'produk'
+          },
+          {
+            text: 'Logistik',
+            align: 'left',
+            value: 'logistik'
+          },
+          {
+            text: 'Pembayaran',
+            align: 'left',
+            value: 'pembayaran'
+          },
+          {
+            text: 'Status Pembayaran',
+            align: 'left',
+            value: 'status_pembayaran'
+          },
+          {
+            text: 'Harga',
+            align: 'left',
+            value: 'harga'
           }
         ],
-        table: [{
-            id: 1,
-            first: 'Mark',
-            last: 'Otto',
-            handle: '@mdo'
-          },
+        table: [
           {
-            id: 2,
-            first: 'Jacob',
-            last: 'Thornton',
-            handle: '@fat'
+            id: '2022032000002',
+            tanggal: 'Saturday, March 20, 2020 5:55',
+            nama: 'Rigen',
+            telepon: '0812-3456-7890',
+            produk: 'Kaos',
+            logistik: 'JNE',
+            pembayaran: 'Transfer',
+            status_pembayaran: 'Tertunda',
+            harga: 'Rp. 100.000',
+            status: 'Pending',
+            date: '2020-03-20'
           },
-          {
-            id: 3,
-            first: 'Larry',
-            last: 'the Bird',
-            handle: '@twitter'
-          }
         ]
       }
     },
     computed: {
       displayMobile() {
         return this.$vuetify.breakpoint.width >= 400
+      },
+    },
+    methods: {
+      statusEvent(e) {
+        this.status = e.target.value
+      },
+      kurirEvent(e) {
+        this.kurir = e.target.value
       },
     },
   }
