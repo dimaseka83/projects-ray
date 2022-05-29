@@ -183,7 +183,7 @@
     },
     computed: {
       displayMobile() {
-        return this.$vuetify.breakpoint.width >= 400
+        return this.$vuetify.breakpoint.width >= 500
       },
     },
     methods: {

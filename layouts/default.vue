@@ -79,9 +79,6 @@
         <Nuxt />
       </v-container>
     </v-main>
-    <v-footer :absolute="!fixed" app>
-      <span>&copy; {{ new Date().getFullYear() }}</span>
-    </v-footer>
   </v-app>
 </template>
 
@@ -173,7 +170,7 @@
     },
     computed: {
       displayMobile() {
-        return this.$vuetify.breakpoint.width >= 400
+        return this.$vuetify.breakpoint.width >= 500
       },
       sizeAvatar(){
         if(this.displayMobile){
