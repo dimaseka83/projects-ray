@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/bootstrap/alert", {data:[{}],fetch:{},mutations:void 0});
