@@ -41,7 +41,7 @@
           <input type="text" class="form-control" placeholder="Lacak Order ID">
         </div>
       </div>
-      <div class="mr-2" v-else>
+      <div class="mr-16" v-else>
           <input type="text" class="form-control" placeholder="Lacak Order ID">
       </div>
 
