@@ -1,5 +1,33 @@
 <template>
-<v-app>
+<div>
+    <div class="d-flex bd-highlight" v-if="displayMobile">
+      <div class="me-auto p-2 bd-highlight">
+        <v-btn color="grey lighten-5">Cancel</v-btn>
+      </div>
+      <div class="p-2 bd-highlight">
+        <v-btn color="teal accent-2">Simpan Sebagai Draft</v-btn>
+      </div>
+      <div class="p-2 bd-highlight">
+        <v-btn color="teal" class="text-white">Publikasikan</v-btn>
+      </div>
+    </div>
+    <div v-else>
+        <div class="row">
+          <div class="col">
+        <v-btn color="grey lighten-5">Cancel</v-btn><br>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+        <v-btn color="teal accent-2">Simpan Sebagai Draft</v-btn>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+        <v-btn color="teal" class="text-white">Publikasikan</v-btn>
+          </div>
+        </div>
+    </div>
     <v-divider></v-divider>
     <div class="row">
       <div :class="columnFull">
@@ -391,7 +419,7 @@
       </div>
       </div>
     </div>
-  </v-app>
+</div>
 </template>
 <script>
   import Dropzone from 'nuxt-dropzone'
@@ -495,11 +523,9 @@
         switchexpress2: false,
         layanansicepat: false,
         sicepattext: 0,
-
         switchjne: false,
         layanansijne: false,
         jnetext: 0,
-
       }
     },
     computed: {
@@ -624,11 +650,9 @@
           this.layanansijne = false
         }
       },
-
     },
     mounted() {
       $('#select2').select2({})
     },
   }
-
 </script>
