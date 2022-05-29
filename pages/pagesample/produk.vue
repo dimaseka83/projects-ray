@@ -203,7 +203,7 @@
               <v-card class="mx-auto">
                 <v-card-title>
                   <v-radio-group v-model="cod">
-                    <v-radio label="Penjual" color="teal" value="pembeli"></v-radio>
+                    <v-radio label="Penjual" color="teal" value="pembeli" class="my-n4"></v-radio>
                   </v-radio-group>
                 </v-card-title>
               </v-card>
