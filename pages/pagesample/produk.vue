@@ -657,11 +657,7 @@
   }
 </script>
 <style>
-  .overflowAuto {
-  overflow-y: scroll;
-  overflow-x: hidden;
-  height: 500px;
-  }
+
 
   @media screen and (max-width: 500px) {
     .overflowFixed{
@@ -669,12 +665,22 @@
       height: 500px;
       width: 95%;
     }
+      .overflowAuto {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 60vh;
+  }
   }
   @media screen and (min-width: 500px) {
       .overflowFixed{
     position: fixed;
     width: 80% !important;
-    bottom: 0;
+    bottom: 20px;
+  }
+        .overflowAuto {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 70vh;
   }
   }
     
