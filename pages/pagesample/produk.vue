@@ -31,185 +31,188 @@
     <v-divider></v-divider>
     <div class="row">
       <div :class="columnFull">
-        <h5 class="font-weight-bold">Produk</h5>
-        <div :class="classForm">
-          <label for="">Gambar <span class="text-danger">*</span></label>
-          <div class="form-text">.jpeg, .jpg, .png, max 10MB, ukuran min 300 x 300 px</div>
-          <dropzone id="foo" ref="el" :options="linkDropzone" :duplicateCheck="true"></dropzone>
-        </div>
-        <div :class="classForm">
-          <label for="">Nama <span class="text-danger">*</span></label>
-          <input type="text" class="form-control" v-model="form.name">
-        </div>
-        <div :class="classForm">
-          <label for="">Slug <span class="text-danger">*</span></label>
-          <input type="text" class="form-control">
-        </div>
-        <div :class="classForm">
-          <label for="">Deskripsi <span class="text-danger">*</span></label>
-          <textarea name="" id="" rows="5" class="form-control"></textarea>
-        </div>
-        <div :class="classForm">
-          <div class="row" v-for="(d, index) in form.variants" :key="index">
-            <div class="col">
-              <label for="">Varian <span class="text-danger">*</span></label>
-              <input type="text" class="form-control" v-model="d.varian">
-            </div>
-            <div class="col">
-              <label for="">Berat (gr) <span class="text-danger">*</span></label>
-              <input type="text" class="form-control" v-model="d.berat">
-            </div>
-            <div class="col">
-              <label for="">Harga <span class="text-danger">*</span></label>
-              <input type="text" class="form-control" v-model="d.harga">
-            </div>
-            <div class="col">
-              <label for="">Stock <span class="text-danger">*</span></label>
-              <input type="text" class="form-control" v-model="d.stock">
-            </div>
-            <div class="col">
-              <button class="btn btn-danger mt-6" @click="deleteVariant" :class="disabledDelete"><i
-                  class="fa-solid fa-trash"></i></button>
+        <div class="overflowAuto">
+          <h5 class="font-weight-bold">Produk</h5>
+          <div :class="classForm">
+            <label for="">Gambar <span class="text-danger">*</span></label>
+            <div class="form-text">.jpeg, .jpg, .png, max 10MB, ukuran min 300 x 300 px</div>
+            <dropzone id="foo" ref="el" :options="linkDropzone" :duplicateCheck="true"></dropzone>
+          </div>
+          <div :class="classForm">
+            <label for="">Nama <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" v-model="form.name">
+          </div>
+          <div :class="classForm">
+            <label for="">Slug <span class="text-danger">*</span></label>
+            <input type="text" class="form-control">
+          </div>
+          <div :class="classForm">
+            <label for="">Deskripsi <span class="text-danger">*</span></label>
+            <textarea name="" id="" rows="5" class="form-control"></textarea>
+          </div>
+          <div :class="classForm">
+            <div class="row" v-for="(d, index) in form.variants" :key="index">
+              <div class="col">
+                <label for="">Varian <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" v-model="d.varian">
+              </div>
+              <div class="col">
+                <label for="">Berat (gr) <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" v-model="d.berat">
+              </div>
+              <div class="col">
+                <label for="">Harga <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" v-model="d.harga">
+              </div>
+              <div class="col">
+                <label for="">Stock <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" v-model="d.stock">
+              </div>
+              <div class="col">
+                <button class="btn btn-danger mt-6" @click="deleteVariant" :class="disabledDelete"><i
+                    class="fa-solid fa-trash"></i></button>
+              </div>
             </div>
           </div>
-        </div>
-        <v-btn color="teal accent-2" @click="addVariant">Tambah varian</v-btn>
-        <v-divider></v-divider>
-        <h5 class="text-muted body-1">TRACKING</h5>
-        <div :class="classForm">
-          <label for="">FB Pixel</label>
-          <input type="text" class="form-control" @keypress="onlyNumber">
-        </div>
-        <v-divider></v-divider>
-        <h5 class="text-muted body-1">PILIHAN KURIR</h5>
-        <div :class="classForm">
-          <v-card class="mx-auto">
-            <v-card-title>
-              <v-img src="https://everpro.s3.ap-southeast-1.amazonaws.com/logistic/logo/sicepats.png" max-width="100">
-              </v-img>
-              <v-row class="ml-5">
-                <v-col>
-                  <span class="font-weight-bold">SiCepat</span>
-                  <p class="font-weight-light">Regular | Same Day</p>
-                </v-col>
-              </v-row>
-            </v-card-title>
-            <v-divider></v-divider>
-            <v-card-actions>
-              <v-switch inset :label="expresswitch" v-model="switchexpress" class="ml-2"></v-switch>
-              <v-spacer></v-spacer>
-              <v-btn color="teal" class="text-white" @click="layanancepat">{{ sicepattext }} Layanan<v-icon right dark
-                  v-if="layanansicepat == true">mdi-arrow-up</v-icon>
-                <v-icon right dark v-else>mdi-arrow-down</v-icon>
-              </v-btn>
-            </v-card-actions>
-            <div class="d-flex bd-highlight" v-if="layanansicepat">
-              <div class="me-auto p-2 bd-highlight">
-                <p class="text-muted body-1 ml-2 pt-5">Reguler</p>
-              </div>
-              <div class="p-2 bd-highlight">
-                <v-switch inset :label="expresswitch1" v-model="switchexpress1"></v-switch>
-              </div>
-            </div>
-            <v-card-subtitle v-if="layanansicepat">
-              <p class="text-black body-1">HALU (Harga Mulai Lima Ribu)</p>
-              <p class="text-black body-1">SIUNTUNG (SIUNTUNG)</p>
-              <p class="text-black body-1">SIUNT (Regular)</p>
-              <p class="text-black body-1">REG (Regular)</p>
+          <v-btn color="teal accent-2" @click="addVariant">Tambah varian</v-btn>
+          <v-divider></v-divider>
+          <h5 class="text-muted body-1">TRACKING</h5>
+          <div :class="classForm">
+            <label for="">FB Pixel</label>
+            <input type="text" class="form-control" @keypress="onlyNumber">
+          </div>
+          <v-divider></v-divider>
+          <h5 class="text-muted body-1">PILIHAN KURIR</h5>
+          <div :class="classForm">
+            <v-card class="mx-auto">
+              <v-card-title>
+                <v-img src="https://everpro.s3.ap-southeast-1.amazonaws.com/logistic/logo/sicepats.png" max-width="100">
+                </v-img>
+                <v-row class="ml-5">
+                  <v-col>
+                    <span class="font-weight-bold">SiCepat</span>
+                    <p class="font-weight-light">Regular | Same Day</p>
+                  </v-col>
+                </v-row>
+              </v-card-title>
               <v-divider></v-divider>
-              <div class="d-flex bd-highlight">
+              <v-card-actions>
+                <v-switch inset :label="expresswitch" v-model="switchexpress" class="ml-2"></v-switch>
+                <v-spacer></v-spacer>
+                <v-btn color="teal" class="text-white" @click="layanancepat">{{ sicepattext }} Layanan<v-icon right dark
+                    v-if="layanansicepat == true">mdi-arrow-up</v-icon>
+                  <v-icon right dark v-else>mdi-arrow-down</v-icon>
+                </v-btn>
+              </v-card-actions>
+              <div class="d-flex bd-highlight" v-if="layanansicepat">
                 <div class="me-auto p-2 bd-highlight">
-                  <p class="text-muted body-1 pt-5">Same Day</p>
+                  <p class="text-muted body-1 ml-2 pt-5">Reguler</p>
                 </div>
                 <div class="p-2 bd-highlight">
-                  <v-switch inset :label="expresswitch2" v-model="switchexpress2"></v-switch>
+                  <v-switch inset :label="expresswitch1" v-model="switchexpress1"></v-switch>
                 </div>
               </div>
-              <p class="text-black body-1 ml-2">SDS (Same Day)</p>
-            </v-card-subtitle>
-          </v-card>
-        </div>
-        <div :class="classForm">
-          <v-card class="mx-auto">
-            <v-card-title>
-              <v-img src="https://upload.wikimedia.org/wikipedia/commons/9/92/New_Logo_JNE.png" max-width="100">
-              </v-img>
-              <v-row class="ml-5">
-                <v-col>
-                  <span class="font-weight-bold">JNE</span>
-                  <p class="font-weight-light">Regular</p>
-                </v-col>
-              </v-row>
-            </v-card-title>
-            <v-divider></v-divider>
-            <v-card-actions>
-              <v-switch inset :label="jneswitch" v-model="switchjne" class="ml-2"></v-switch>
-              <v-spacer></v-spacer>
-              <v-btn color="teal" class="text-white" @click="layananjne">{{ jnetext }} Layanan<v-icon right dark
-                  v-if="layanansijne == true">mdi-arrow-up</v-icon>
-                <v-icon right dark v-else>mdi-arrow-down</v-icon>
-              </v-btn>
-            </v-card-actions>
-            <div class="d-flex bd-highlight" v-if="layanansijne">
-              <div class="me-auto p-2 bd-highlight">
-                <p class="text-muted body-1 ml-2 pt-5">Reguler</p>
+              <v-card-subtitle v-if="layanansicepat">
+                <p class="text-black body-1">HALU (Harga Mulai Lima Ribu)</p>
+                <p class="text-black body-1">SIUNTUNG (SIUNTUNG)</p>
+                <p class="text-black body-1">SIUNT (Regular)</p>
+                <p class="text-black body-1">REG (Regular)</p>
+                <v-divider></v-divider>
+                <div class="d-flex bd-highlight">
+                  <div class="me-auto p-2 bd-highlight">
+                    <p class="text-muted body-1 pt-5">Same Day</p>
+                  </div>
+                  <div class="p-2 bd-highlight">
+                    <v-switch inset :label="expresswitch2" v-model="switchexpress2"></v-switch>
+                  </div>
+                </div>
+                <p class="text-black body-1 ml-2">SDS (Same Day)</p>
+              </v-card-subtitle>
+            </v-card>
+          </div>
+          <div :class="classForm">
+            <v-card class="mx-auto">
+              <v-card-title>
+                <v-img src="https://upload.wikimedia.org/wikipedia/commons/9/92/New_Logo_JNE.png" max-width="100">
+                </v-img>
+                <v-row class="ml-5">
+                  <v-col>
+                    <span class="font-weight-bold">JNE</span>
+                    <p class="font-weight-light">Regular</p>
+                  </v-col>
+                </v-row>
+              </v-card-title>
+              <v-divider></v-divider>
+              <v-card-actions>
+                <v-switch inset :label="jneswitch" v-model="switchjne" class="ml-2"></v-switch>
+                <v-spacer></v-spacer>
+                <v-btn color="teal" class="text-white" @click="layananjne">{{ jnetext }} Layanan<v-icon right dark
+                    v-if="layanansijne == true">mdi-arrow-up</v-icon>
+                  <v-icon right dark v-else>mdi-arrow-down</v-icon>
+                </v-btn>
+              </v-card-actions>
+              <div class="d-flex bd-highlight" v-if="layanansijne">
+                <div class="me-auto p-2 bd-highlight">
+                  <p class="text-muted body-1 ml-2 pt-5">Reguler</p>
+                </div>
+                <div class="p-2 bd-highlight">
+                  <v-switch inset :label="jneswitch" v-model="switchjne"></v-switch>
+                </div>
               </div>
-              <div class="p-2 bd-highlight">
-                <v-switch inset :label="jneswitch" v-model="switchjne"></v-switch>
-              </div>
+              <v-card-subtitle v-if="layanansijne">
+                <p class="text-black body-1">REG19 (Regular)</p>
+                <p class="text-black body-1">CTC19 (CTC (City to City))</p>
+                <p class="text-black body-1">OKE19 (OKE (Ongkos Kirim Ekonomis))</p>
+              </v-card-subtitle>
+            </v-card>
+            <div :class="classForm">
+              <label for="">Asal Pengiriman <span class="text-danger">*</span></label>
+              <select name="" id="select2" class="form-control">
+                <option v-for="(opt, id) in asalpengiriman" :key="id" :value="opt.value">{{opt.text}}</option>
+              </select>
             </div>
-            <v-card-subtitle v-if="layanansijne">
-              <p class="text-black body-1">REG19 (Regular)</p>
-              <p class="text-black body-1">CTC19 (CTC (City to City))</p>
-              <p class="text-black body-1">OKE19 (OKE (Ongkos Kirim Ekonomis))</p>
-            </v-card-subtitle>
-          </v-card>
-          <div :class="classForm">
-            <label for="">Asal Pengiriman <span class="text-danger">*</span></label>
-            <select name="" id="select2" class="form-control">
-              <option v-for="(opt, id) in asalpengiriman" :key="id" :value="opt.value">{{opt.text}}</option>
-            </select>
-          </div>
-          <h5 class="text-muted body-1">COD DITANGGUNG OLEH</h5>
-          <span class="text-decoration-underline text-teal">Contoh Simulasi Pencarian</span>
-          <div :class="classForm">
-            <v-card color="grey lighten-4">
-              <v-card-text>
-                <i class="fa-solid fa-triangle-exclamation"></i>
-                <span class="text-black">Penjual akan dikenakan biaya COD sebesar 3% pada saat pencairan </span>
-              </v-card-text>
-            </v-card>
-          </div>
-          <div :class="classForm">
-            <v-card class="mx-auto">
-              <v-card-title>
-                <v-radio-group v-model="cod">
-                  <v-radio label="Pembeli" color="teal" value="pembeli"></v-radio>
-                </v-radio-group>
-              </v-card-title>
-              <v-card-text class="ml-7 pr-16">
-                <p class="text-black body-1">Biaya COD <span class="text-danger">*</span></p>
-                <div class="input-group mb-3">
-                  <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
-                  <span class="input-group-text" id="basic-addon1">%</span>
-                </div>
-                <span class="text-muted"><i class="fa-solid fa-circle-exclamation"></i> Biaya COD akan dibayarkan oleh
-                  pembeli kepada penjual berdasarkan harga barang + ongkir </span>
-              </v-card-text>
-            </v-card>
-          </div>
-          <div :class="classForm">
-            <v-card class="mx-auto">
-              <v-card-title>
-                <v-radio-group v-model="cod">
-                  <v-radio label="Penjual" color="teal" value="pembeli"></v-radio>
-                </v-radio-group>
-              </v-card-title>
-            </v-card>
+            <h5 class="text-muted body-1">COD DITANGGUNG OLEH</h5>
+            <span class="text-decoration-underline text-teal">Contoh Simulasi Pencarian</span>
+            <div :class="classForm">
+              <v-card color="grey lighten-4">
+                <v-card-text>
+                  <i class="fa-solid fa-triangle-exclamation"></i>
+                  <span class="text-black">Penjual akan dikenakan biaya COD sebesar 3% pada saat pencairan </span>
+                </v-card-text>
+              </v-card>
+            </div>
+            <div :class="classForm">
+              <v-card class="mx-auto">
+                <v-card-title>
+                  <v-radio-group v-model="cod">
+                    <v-radio label="Pembeli" color="teal" value="pembeli"></v-radio>
+                  </v-radio-group>
+                </v-card-title>
+                <v-card-text class="ml-7 pr-16">
+                  <p class="text-black body-1">Biaya COD <span class="text-danger">*</span></p>
+                  <div class="input-group mb-3">
+                    <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+                    <span class="input-group-text" id="basic-addon1">%</span>
+                  </div>
+                  <span class="text-muted"><i class="fa-solid fa-circle-exclamation"></i> Biaya COD akan dibayarkan oleh
+                    pembeli kepada penjual berdasarkan harga barang + ongkir </span>
+                </v-card-text>
+              </v-card>
+            </div>
+            <div :class="classForm">
+              <v-card class="mx-auto">
+                <v-card-title>
+                  <v-radio-group v-model="cod">
+                    <v-radio label="Penjual" color="teal" value="pembeli"></v-radio>
+                  </v-radio-group>
+                </v-card-title>
+              </v-card>
+            </div>
           </div>
         </div>
       </div>
-      <div class="col-6 overflowAuto" v-if="displayMobile">
+      <div class="col-6" v-if="displayMobile">
+        <div class="overflowAuto">
         <select name="" id="" class="form-select col-4" v-model="preview">
           <option value="desktop">Desktop Preview</option>
           <option value="mobile">Mobile Preview</option>
@@ -413,6 +416,10 @@
             </v-card>
           </div>
         </div>
+      
+      
+      
+      </div>
       </div>
     </div>
   </div>
@@ -573,9 +580,9 @@
       },
       columnFull() {
         if (this.displayMobile) {
-          return 'col-6 overflowAuto'
+          return 'col-6'
         } else {
-          return 'col-12 overflowAuto'
+          return 'col-12'
         }
       },
     },
