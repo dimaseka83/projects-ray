@@ -1,5 +1,5 @@
 <template>
-  <div>
+<v-app>
     <div class="d-flex bd-highlight" v-if="displayMobile">
       <div class="me-auto p-2 bd-highlight">
         <v-btn color="grey lighten-5">Cancel</v-btn>
@@ -416,13 +416,10 @@
             </v-card>
           </div>
         </div>
-      
-      
-      
       </div>
       </div>
     </div>
-  </div>
+  </v-app>
 </template>
 <script>
   import Dropzone from 'nuxt-dropzone'
