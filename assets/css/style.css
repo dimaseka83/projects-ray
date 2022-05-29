@@ -1,4 +1,4 @@
-  .overflowAuto {
+  /* .overflowAuto {
     overflow-x: hidden;
     overflow-y: scroll;
     height: calc(100vh - 250px);
@@ -9,7 +9,7 @@
   overflow: auto;
   position: fixed;
   width: 50%!important;
-}
+} */
 .fixed-content {
   position:fixed;
   overflow-y:scroll;

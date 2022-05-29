@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="overflowFixed">
     <div class="d-flex bd-highlight" v-if="displayMobile">
       <div class="me-auto p-2 bd-highlight">
         <v-btn color="grey lighten-5">Cancel</v-btn>
@@ -656,3 +656,26 @@
     },
   }
 </script>
+<style>
+  .overflowAuto {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 500px;
+  }
+
+  @media screen and (max-width: 500px) {
+    .overflowFixed{
+      position: fixed;
+      height: 500px;
+      width: 95%;
+    }
+  }
+  @media screen and (min-width: 500px) {
+      .overflowFixed{
+    position: fixed;
+    width: 80% !important;
+    bottom: 0;
+  }
+  }
+    
+  </style>
